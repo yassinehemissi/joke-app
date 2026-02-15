@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import BodyText from "@/components/atoms/BodyText";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import JokePanel from "@/components/organisms/JokePanel";

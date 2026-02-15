@@ -1,8 +1,10 @@
+'use server'
+
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 
 const DEFAULT_MODEL = "openai/gpt-4o";
 
-export default function buildOpenRouterClient() {
+export default async function buildAIClient() {
   const apiKey = process.env.OPENROUTER_API_KEY ?? "";
 
   const openrouter = createOpenRouter({

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CommentaryData, JokeApiResponse, JokeData } from "./types";
 
 const useHome = () => {
 	const [joke, setJoke] = useState<JokeData | null>(null);

@@ -1,4 +1,6 @@
-type JokeApiData = {
+'use server'
+
+export type JokeApiData = {
   error: boolean;
   category: string;
   type: "single" | "twopart";
@@ -18,7 +20,7 @@ type JokeApiData = {
   lang: string;
 };
 
-const JOKE_API_URL = "https://v2.jokeapi.dev/joke/Any?format=json";
+const JOKE_API_URL = "https://v2.jokeapi.dev/joke/any";
 
 export default async function fetchJoke() {
   const jokeResponse = await fetch(JOKE_API_URL, { cache: "no-store" });

@@ -1,4 +1,4 @@
-type JokeData = {
+export type JokeData = {
   category: string;
   type: string;
   setup?: string;
@@ -7,12 +7,12 @@ type JokeData = {
   safe: boolean;
 };
 
-type CommentaryData = {
+export type CommentaryData = {
   comment: string;
   explanation: string;
 };
 
-type JokeApiResponse = {
+export type JokeApiResponse = {
   joke: JokeData;
   ai: CommentaryData;
 };

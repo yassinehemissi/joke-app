@@ -1,15 +1,13 @@
-import { generateText } from "ai";
-import buildOpenRouterClient from "@/lib/buildOpenRouterClient";
 import fetchJoke from "@/lib/fetchJoke";
-import parseAiPayload from "@/lib/parseAiPayload";
+import { generateComment } from "@/lib/generateComment";
+
+const ApiKey = process.env.OPENROUTER_API_KEY;
 
 export async function POST() {
-  if (!process.env.OPENROUTER_API_KEY) {
-    return Response.json(
-      { error: "Missing OPENROUTER_API_KEY." },
-      { status: 500 }
-    );
-  }
+  if (!ApiKey) return Response.json(
+    { error: "Missing OPENROUTER_API_KEY." },
+    { status: 500 }
+  );
 
   let jokeData: Awaited<ReturnType<typeof fetchJoke>>;
 
@@ -32,21 +30,8 @@ export async function POST() {
       ? jokeData.joke ?? ""
       : `${jokeData.setup ?? ""} ${jokeData.delivery ?? ""}`.trim();
 
-  const { model, modelId } = buildOpenRouterClient();
+  const ai = await generateComment(jokeData, jokeText);
 
-  const { text } = await generateText({
-    model: model(modelId),
-    system:
-      "You are a witty but respectful comedy critic. Keep it concise and insightful.",
-    prompt: `Joke: "${jokeText}"
-Category: ${jokeData.category}
-Flags: nsfw=${jokeData.flags.nsfw}, religious=${jokeData.flags.religious}, political=${jokeData.flags.political}, racist=${jokeData.flags.racist}, sexist=${jokeData.flags.sexist}, explicit=${jokeData.flags.explicit}
-
-Return JSON only with this shape:
-{"comment":"...","explanation":"..."}`,
-  });
-
-  const ai = parseAiPayload(text);
 
   return Response.json({
     joke: {
