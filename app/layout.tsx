@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Joke App",
+  description: "Get a random joke and an AI comment that explains it.",
+};
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
