@@ -17,10 +17,10 @@ Joke App is a single-page Next.js app that fetches random jokes from JokeAPI and
 ### Usage
 ```bash
 bun install
-bun dev 
+bun run dev 
 # or 
-bun build 
-bun start
+bun run build 
+bun run start
 ```
 
 *AI Generated Readme*
